@@ -1,0 +1,31 @@
+require 'fileutils'
+
+def del arr
+  if arr.is_a? String then arr = [arr] end
+  arr.each do |str|
+    if File.exist?(str) then
+      if File.directory?(str) then FileUtils.rm_rf str
+      else FileUtils.rm str end
+    end
+  end
+end
+
+task :default => 'build'
+
+desc "Build the proj"
+task :build do
+  FileUtils.mkdir 'build' unless File.exist? 'build'
+  sh "g++ -std=c++11 -Wall -pedantic -Wno-long-long -o build/taxregister.out src/taxregister.cpp"
+end
+
+desc "Test the code"
+task :test do
+  FileUtils.mkdir 'build' unless File.exist? 'build'
+  sh "g++ -std=c++11 -Wall -pedantic -Wno-long-long -DNO_MAIN -o build/test.out test/test.cpp src/taxregister.cpp"
+  sh "./build/test.out"
+end
+
+desc "Clean the dir"
+task :clean do
+  del 'build'
+end
