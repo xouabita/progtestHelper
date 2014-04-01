@@ -54,8 +54,7 @@ TEST_CASE ("Basic Tests", "[basic]") {
   // d = 3794.598230
 
   CCoord tmp0 = x0 [ 1 ];
-  output << tmp0;
-  REQUIRE ( output == "(50 6\'1.361\"N, 14 23\'33.045\"E)" );
+  output << tmp0;  REQUIRE ( output == "(50 6\'1.361\"N, 14 23\'33.045\"E)" );
   cout << tmp0;
   // (50 6'1.361"N, 14 23'33.045"E)
 
