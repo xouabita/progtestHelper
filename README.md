@@ -11,35 +11,48 @@ You can also contribute to this repo if you want. Just give me your github usern
 Dependencies :
 --------------
 
-- Ruby → [http://kiq.li/S8][1]
-- Rake → Open a terminal and type :
+- Make
+- g++
 
+Installation :
+--------------
+
+Just open a terminal and run :
 ```bash
-gem install rake
+git clone --recursive https://github.com/xouabita/progtestHelper.git
 ```
 
 Instructions
 ------------
 
-To build your code, just type in a terminal :
+Go to the directory of the Homework that you want do and then follow the readme instructions.
+
+The common commands for build and test the code are : 
+
+### Build the src/main.cpp
 
 ```bash
-rake
+make # or
+make build
 ```
 
-To make the test :
+### Run the src/main.cpp
+```bash
+make run
+```
+
+### To run the test :
 
 ```bash
-rake test
+make test
 ```
 
-To clean the directory:
+### To clean the directory:
 
 ```bash
-rake clean
+make clean
 ```
+Questions
+---------
 
 If you have some questions, just ask me on Facebook or open an issue.
-
-
-  [1]: http://kiq.li/S8
