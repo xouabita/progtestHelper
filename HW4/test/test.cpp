@@ -677,6 +677,37 @@ if (res != 0) {
 REQUIRE (res == 0); stream.str("");
 }
 
-TEST_CASE ("Custom Tests", "[custom]") {
-  // Other tests here
+TEST_CASE ("Transactions tests", "[trans]") {
+  CBank a;
+  a . NewAccount ( "ttt", 0 );
+  a . NewAccount ( "PPP", 100);
+  for (int i=0; i < 100; i++) {
+    REQUIRE ( a . Transaction ("PPP","ttt",1,"III") );
+    REQUIRE ( a . Account ( "PPP" ) . Balance () == 100 - (i+1) );
+    REQUIRE ( a . Account ( "ttt" ) . Balance () == 0 + i + 1 );
+  }
+}
+
+TEST_CASE ("Lot of accounts", "[acc]") {
+  bool status; CBank a;
+  char str[102]; str[0] = 'I'; str[1] = '\0';
+  for (int i=0; i < 100; i++) {
+    cout << "I: " << i << endl;
+    status = a . NewAccount (str, i);
+    REQUIRE ( status );
+    str[i+1] = 'I'; str[i+2] = '\0';
+  }
+  char res[102]; res[0] = 'I'; res[1] = '\0';
+  for (int i=0; i < 100; i++) {
+    REQUIRE ( a . Account (res) . Balance () == i );
+    res[i+1] = 'I'; res[i+2] = '\0';
+  }
+}
+
+TEST_CASE ( "Lot of copies" , "[copy]" ) {
+  CBank a;
+  CBank banks[1000]; banks[0] = a;
+  for (int i=1; i < 1000; ++i) {
+    banks[i] = banks[i-1];
+  }
 }
